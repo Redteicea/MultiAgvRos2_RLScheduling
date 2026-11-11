@@ -1,0 +1,47 @@
+# =====================================================================
+# NavigateToPose.action — 多车导航 Action
+# ---------------------------------------------------------------------
+# 一个 action 服务器（fleet_nav_server）管理所有 AGV 的导航；
+# 调度器（fleet_scheduler）只发送目标点，不参与任何规划/控制。
+#
+# 生命周期：
+#   调度器 async_send_goal ──> 服务器 accept（车空闲）/ reject（车忙/未知）
+#   执行中：周期 feedback（2Hz，剩余距离/状态/耗时）
+#   终态四选一：
+#     SUCCEEDED  到点（goal_tolerance 内）
+#     ABORTED    规划失败/不可达（连续重规划耗尽预算）
+#     CANCELED   客户端主动取消（电量中断/任务重排等）
+#     TIMEOUT    超过 goal.timeout_sec（0 = 不限时）
+#
+# 注：坐标均为世界系数值（== RViz "map" 帧数值）
+# =====================================================================
+
+# ---------- Goal ----------
+string robot_name          # 目标车（须与 model_states 模型名一致，如 agv_0）
+float64 x                  # 目标点（世界系）
+float64 y
+float64 timeout_sec        # 导航超时 [s]；0 = 不限时（服务器强制执行）
+int32 priority             # 让行仲裁优先级：1=最高；999=无任务（如充电）
+---
+# ---------- Result ----------
+# 终态码（status 字段的取值域）
+uint8 STATUS_SUCCEEDED = 0
+uint8 STATUS_ABORTED    = 1
+uint8 STATUS_CANCELED   = 2
+uint8 STATUS_TIMEOUT    = 3
+uint8 status
+float64 final_x             # 终态时车实际位姿
+float64 final_y
+float64 distance_remaining  # 终态时距目标点距离（SUCCEEDED 时 < goal_tolerance）
+string message              # 消息（失败原因等）
+---
+# ---------- Feedback（执行中周期上报） ----------
+# 导航状态机的阶段（服务器内部状态，与调度器的任务状态机无关）
+uint8 NAV_PLANNING  = 0     # 正在 A* 全局规划
+uint8 NAV_MOVING    = 1     # 行驶中（TEB + 纯跟踪）
+uint8 NAV_YIELD     = 2     # 让行中（优先级仲裁）
+uint8 NAV_RECOVERY  = 3     # 盲脱困（三阶段摆尾）
+uint8 state
+float64 distance_remaining  # 剩余距离 [m]（沿航点序列）
+float64 elapsed_sec         # 已耗时 [s]
+string message

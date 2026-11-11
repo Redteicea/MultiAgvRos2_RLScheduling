@@ -1,0 +1,5922 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <world name="warehouse">
+    <scene>
+      <ambient>0.72 0.72 0.75 1</ambient>
+      <background>0.88 0.88 0.92 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <include><uri>model://ground_plane</uri></include>
+    <include><uri>model://sun</uri></include>
+    <plugin name="gazebo_ros_state" filename="libgazebo_ros_state.so">
+      <ros><namespace>/fleet_sim</namespace></ros>
+      <update_rate>10</update_rate>
+    </plugin>
+    <light type="point" name="light_0">
+      <pose>-6 3.5 4.5 0 0 0</pose>
+      <diffuse>0.85 0.85 0.85 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation><range>14</range><constant>0.9</constant><linear>0.01</linear><quadratic>0.01</quadratic></attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+    <light type="point" name="light_1">
+      <pose>6 3.5 4.5 0 0 0</pose>
+      <diffuse>0.85 0.85 0.85 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation><range>14</range><constant>0.9</constant><linear>0.01</linear><quadratic>0.01</quadratic></attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+    <light type="point" name="light_2">
+      <pose>-6 -3.5 4.5 0 0 0</pose>
+      <diffuse>0.85 0.85 0.85 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation><range>14</range><constant>0.9</constant><linear>0.01</linear><quadratic>0.01</quadratic></attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+    <light type="point" name="light_3">
+      <pose>6 -3.5 4.5 0 0 0</pose>
+      <diffuse>0.85 0.85 0.85 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation><range>14</range><constant>0.9</constant><linear>0.01</linear><quadratic>0.01</quadratic></attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+  <model name="wall_east">
+    <static>true</static>
+    <pose>12.0 0 0.75 0 0 0</pose>
+    <link name="wall">
+      <visual name="wall_v">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry><box><size>0.5 16.5 1.5</size></box></geometry>
+        <material>
+          <ambient>0.72 0.72 0.75 1.0</ambient>
+          <diffuse>0.72 0.72 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="wall_c">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry><box><size>0.5 16.5 1.5</size></box></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="wall_west">
+    <static>true</static>
+    <pose>-12.0 0 0.75 0 0 0</pose>
+    <link name="wall">
+      <visual name="wall_v">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry><box><size>0.5 16.5 1.5</size></box></geometry>
+        <material>
+          <ambient>0.72 0.72 0.75 1.0</ambient>
+          <diffuse>0.72 0.72 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="wall_c">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry><box><size>0.5 16.5 1.5</size></box></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="wall_north">
+    <static>true</static>
+    <pose>0 8.0 0.75 0 0 0</pose>
+    <link name="wall">
+      <visual name="wall_v">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry><box><size>24.5 0.5 1.5</size></box></geometry>
+        <material>
+          <ambient>0.72 0.72 0.75 1.0</ambient>
+          <diffuse>0.72 0.72 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="wall_c">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry><box><size>24.5 0.5 1.5</size></box></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="wall_south">
+    <static>true</static>
+    <pose>0 -8.0 0.75 0 0 0</pose>
+    <link name="wall">
+      <visual name="wall_v">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry><box><size>24.5 0.5 1.5</size></box></geometry>
+        <material>
+          <ambient>0.72 0.72 0.75 1.0</ambient>
+          <diffuse>0.72 0.72 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="wall_c">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry><box><size>24.5 0.5 1.5</size></box></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="rack_r0_c0">
+    <static>true</static>
+    <pose>-7.0 5.2 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.0 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.9 0.35 0.1 1.0</ambient>
+          <diffuse>0.9 0.35 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h1">
+      <visual name="box_h1_v">
+        <pose>0 0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.95 0.75 0.1 1.0</ambient>
+          <diffuse>0.95 0.75 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h2">
+      <visual name="box_h2_v">
+        <pose>0 -0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.55 0.3 0.75 1.0</ambient>
+          <diffuse>0.55 0.3 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r0_c1">
+    <static>true</static>
+    <pose>-4.2 5.2 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.6 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.25 0.75 0.35 1.0</ambient>
+          <diffuse>0.25 0.75 0.35 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h1">
+      <visual name="box_h1_v">
+        <pose>0 0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.55 0.3 0.75 1.0</ambient>
+          <diffuse>0.55 0.3 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h2">
+      <visual name="box_h2_v">
+        <pose>0 -0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.9 0.35 0.1 1.0</ambient>
+          <diffuse>0.9 0.35 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r0_c2">
+    <static>true</static>
+    <pose>-1.4 5.2 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.6 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.95 0.75 0.1 1.0</ambient>
+          <diffuse>0.95 0.75 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h1">
+      <visual name="box_h1_v">
+        <pose>0 0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.9 0.35 0.1 1.0</ambient>
+          <diffuse>0.9 0.35 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h2">
+      <visual name="box_h2_v">
+        <pose>0 -0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r0_c3">
+    <static>true</static>
+    <pose>1.4 5.2 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.6 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.25 0.75 0.35 1.0</ambient>
+          <diffuse>0.25 0.75 0.35 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.55 0.3 0.75 1.0</ambient>
+          <diffuse>0.55 0.3 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r0_c4">
+    <static>true</static>
+    <pose>4.2 5.2 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.6 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r0_c5">
+    <static>true</static>
+    <pose>7.0 5.2 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.0 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.55 0.3 0.75 1.0</ambient>
+          <diffuse>0.55 0.3 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h1">
+      <visual name="box_h1_v">
+        <pose>0 0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.25 0.75 0.35 1.0</ambient>
+          <diffuse>0.25 0.75 0.35 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h2">
+      <visual name="box_h2_v">
+        <pose>0 -0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.95 0.75 0.1 1.0</ambient>
+          <diffuse>0.95 0.75 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r1_c0">
+    <static>true</static>
+    <pose>-7.0 2.0 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.0 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.95 0.75 0.1 1.0</ambient>
+          <diffuse>0.95 0.75 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r1_c1">
+    <static>true</static>
+    <pose>-4.2 2.0 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.6 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r1_c2">
+    <static>true</static>
+    <pose>-1.4 2.0 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.6 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.95 0.75 0.1 1.0</ambient>
+          <diffuse>0.95 0.75 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.9 0.35 0.1 1.0</ambient>
+          <diffuse>0.9 0.35 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h1">
+      <visual name="box_h1_v">
+        <pose>0 0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h2">
+      <visual name="box_h2_v">
+        <pose>0 -0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.25 0.75 0.35 1.0</ambient>
+          <diffuse>0.25 0.75 0.35 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r1_c3">
+    <static>true</static>
+    <pose>1.4 2.0 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.6 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.55 0.3 0.75 1.0</ambient>
+          <diffuse>0.55 0.3 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h1">
+      <visual name="box_h1_v">
+        <pose>0 0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.25 0.75 0.35 1.0</ambient>
+          <diffuse>0.25 0.75 0.35 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h2">
+      <visual name="box_h2_v">
+        <pose>0 -0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.95 0.75 0.1 1.0</ambient>
+          <diffuse>0.95 0.75 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r1_c4">
+    <static>true</static>
+    <pose>4.2 2.0 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.6 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.9 0.35 0.1 1.0</ambient>
+          <diffuse>0.9 0.35 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h1">
+      <visual name="box_h1_v">
+        <pose>0 0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.95 0.75 0.1 1.0</ambient>
+          <diffuse>0.95 0.75 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h2">
+      <visual name="box_h2_v">
+        <pose>0 -0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.55 0.3 0.75 1.0</ambient>
+          <diffuse>0.55 0.3 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r1_c5">
+    <static>true</static>
+    <pose>7.0 2.0 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.0 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.25 0.75 0.35 1.0</ambient>
+          <diffuse>0.25 0.75 0.35 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r2_c0">
+    <static>true</static>
+    <pose>-7.0 -2.0 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.0 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.95 0.75 0.1 1.0</ambient>
+          <diffuse>0.95 0.75 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.9 0.35 0.1 1.0</ambient>
+          <diffuse>0.9 0.35 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h1">
+      <visual name="box_h1_v">
+        <pose>0 0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h2">
+      <visual name="box_h2_v">
+        <pose>0 -0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.25 0.75 0.35 1.0</ambient>
+          <diffuse>0.25 0.75 0.35 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r2_c1">
+    <static>true</static>
+    <pose>-4.2 -2.0 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.6 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.55 0.3 0.75 1.0</ambient>
+          <diffuse>0.55 0.3 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h1">
+      <visual name="box_h1_v">
+        <pose>0 0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.25 0.75 0.35 1.0</ambient>
+          <diffuse>0.25 0.75 0.35 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h2">
+      <visual name="box_h2_v">
+        <pose>0 -0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.95 0.75 0.1 1.0</ambient>
+          <diffuse>0.95 0.75 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r2_c2">
+    <static>true</static>
+    <pose>-1.4 -2.0 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.6 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.9 0.35 0.1 1.0</ambient>
+          <diffuse>0.9 0.35 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r2_c3">
+    <static>true</static>
+    <pose>1.4 -2.0 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.6 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r2_c4">
+    <static>true</static>
+    <pose>4.2 -2.0 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.6 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.95 0.75 0.1 1.0</ambient>
+          <diffuse>0.95 0.75 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h1">
+      <visual name="box_h1_v">
+        <pose>0 0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.9 0.35 0.1 1.0</ambient>
+          <diffuse>0.9 0.35 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h2">
+      <visual name="box_h2_v">
+        <pose>0 -0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r2_c5">
+    <static>true</static>
+    <pose>7.0 -2.0 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.0 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.25 0.75 0.35 1.0</ambient>
+          <diffuse>0.25 0.75 0.35 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.55 0.3 0.75 1.0</ambient>
+          <diffuse>0.55 0.3 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h1">
+      <visual name="box_h1_v">
+        <pose>0 0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h2">
+      <visual name="box_h2_v">
+        <pose>0 -0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r3_c0">
+    <static>true</static>
+    <pose>-7.0 -5.2 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.0 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r3_c1">
+    <static>true</static>
+    <pose>-4.2 -5.2 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.6 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.25 0.75 0.35 1.0</ambient>
+          <diffuse>0.25 0.75 0.35 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h1">
+      <visual name="box_h1_v">
+        <pose>0 0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.55 0.3 0.75 1.0</ambient>
+          <diffuse>0.55 0.3 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h2">
+      <visual name="box_h2_v">
+        <pose>0 -0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.9 0.35 0.1 1.0</ambient>
+          <diffuse>0.9 0.35 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r3_c2">
+    <static>true</static>
+    <pose>-1.4 -5.2 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.6 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.95 0.75 0.1 1.0</ambient>
+          <diffuse>0.95 0.75 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h1">
+      <visual name="box_h1_v">
+        <pose>0 0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.9 0.35 0.1 1.0</ambient>
+          <diffuse>0.9 0.35 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h2">
+      <visual name="box_h2_v">
+        <pose>0 -0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r3_c3">
+    <static>true</static>
+    <pose>1.4 -5.2 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.6 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.25 0.75 0.35 1.0</ambient>
+          <diffuse>0.25 0.75 0.35 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.55 0.3 0.75 1.0</ambient>
+          <diffuse>0.55 0.3 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h1">
+      <visual name="box_h1_v">
+        <pose>0 0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_h2">
+      <visual name="box_h2_v">
+        <pose>0 -0.4 1.07 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r3_c4">
+    <static>true</static>
+    <pose>4.2 -5.2 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.6 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l1">
+      <visual name="box_l1_v">
+        <pose>0 0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.95 0.75 0.1 1.0</ambient>
+          <diffuse>0.95 0.75 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="box_l2">
+      <visual name="box_l2_v">
+        <pose>0 -0.4 0.47 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.4</size></box></geometry>
+        <material>
+          <ambient>0.9 0.35 0.1 1.0</ambient>
+          <diffuse>0.9 0.35 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_r3_c5">
+    <static>true</static>
+    <pose>7.0 -5.2 0 0 0 0</pose>
+    <link name="col">
+      <collision name="col_c">
+        <pose>0 0 0.75 0 0 0</pose>
+        <geometry><box><size>0.6 1.0 1.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="post_0_25_0_75">
+      <visual name="post_0_25_0_75_v">
+        <pose>0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_0_25_m0_75">
+      <visual name="post_0_25_m0_75_v">
+        <pose>0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_0_75">
+      <visual name="post_m0_25_0_75_v">
+        <pose>-0.25 0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="post_m0_25_m0_75">
+      <visual name="post_m0_25_m0_75_v">
+        <pose>-0.25 -0.75 0.75 0 0 0</pose>
+        <geometry><box><size>0.06 0.06 1.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_low">
+      <visual name="deck_low_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="deck_mid">
+      <visual name="deck_mid_v">
+        <pose>0 0 0.85 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.04</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="top_beam">
+      <visual name="top_beam_v">
+        <pose>0 0 1.45 0 0 0</pose>
+        <geometry><box><size>0.64 1.6400000000000001 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.5 1.0</ambient>
+          <diffuse>0.45 0.45 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="station_pickup_w">
+    <static>true</static>
+    <pose>-10.4 0.0 0 0 0 0.0</pose>
+    <link name="zone">
+      <visual name="zone_v">
+        <pose>0 0 0.01 0 0 0</pose>
+        <geometry><box><size>1.2 1.2 0.02</size></box></geometry>
+        <material>
+          <ambient>0.12 0.68 0.32 1.0</ambient>
+          <diffuse>0.12 0.68 0.32 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="stopline">
+      <visual name="stopline_v">
+        <pose>0 0.28 0.011 0 0 0</pose>
+        <geometry><box><size>1.1 0.06 0.012</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_0_6_0_6">
+      <visual name="bollard_0_6_0_6_v">
+        <pose>0.6 0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_0_6_m0_6">
+      <visual name="bollard_0_6_m0_6_v">
+        <pose>0.6 -0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_m0_6_0_6">
+      <visual name="bollard_m0_6_0_6_v">
+        <pose>-0.6 0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_m0_6_m0_6">
+      <visual name="bollard_m0_6_m0_6_v">
+        <pose>-0.6 -0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="pallet">
+      <visual name="pallet_v">
+        <pose>-0.85 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.9 0.7 0.1</size></box></geometry>
+        <material>
+          <ambient>0.55 0.35 0.15 1.0</ambient>
+          <diffuse>0.55 0.35 0.15 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="pallet_c">
+        <pose>-0.85 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.9 0.7 0.1</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="goods1">
+      <visual name="goods1_v">
+        <pose>-0.85 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="goods1_c">
+        <pose>-0.85 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="goods2">
+      <visual name="goods2_v">
+        <pose>-0.85 0 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="goods2_c">
+        <pose>-0.85 0 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="station_pickup_e">
+    <static>true</static>
+    <pose>10.4 0.0 0 0 0 0.0</pose>
+    <link name="zone">
+      <visual name="zone_v">
+        <pose>0 0 0.01 0 0 0</pose>
+        <geometry><box><size>1.2 1.2 0.02</size></box></geometry>
+        <material>
+          <ambient>0.12 0.68 0.32 1.0</ambient>
+          <diffuse>0.12 0.68 0.32 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="stopline">
+      <visual name="stopline_v">
+        <pose>0 0.28 0.011 0 0 0</pose>
+        <geometry><box><size>1.1 0.06 0.012</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_0_6_0_6">
+      <visual name="bollard_0_6_0_6_v">
+        <pose>0.6 0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_0_6_m0_6">
+      <visual name="bollard_0_6_m0_6_v">
+        <pose>0.6 -0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_m0_6_0_6">
+      <visual name="bollard_m0_6_0_6_v">
+        <pose>-0.6 0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_m0_6_m0_6">
+      <visual name="bollard_m0_6_m0_6_v">
+        <pose>-0.6 -0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="pallet">
+      <visual name="pallet_v">
+        <pose>0.85 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.9 0.7 0.1</size></box></geometry>
+        <material>
+          <ambient>0.55 0.35 0.15 1.0</ambient>
+          <diffuse>0.55 0.35 0.15 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="pallet_c">
+        <pose>0.85 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.9 0.7 0.1</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="goods1">
+      <visual name="goods1_v">
+        <pose>0.85 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="goods1_c">
+        <pose>0.85 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="goods2">
+      <visual name="goods2_v">
+        <pose>0.85 0 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="goods2_c">
+        <pose>0.85 0 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="station_pickup_n">
+    <static>true</static>
+    <pose>0.0 6.8 0 0 0 1.5707963</pose>
+    <link name="zone">
+      <visual name="zone_v">
+        <pose>0 0 0.01 0 0 0</pose>
+        <geometry><box><size>1.2 1.2 0.02</size></box></geometry>
+        <material>
+          <ambient>0.12 0.68 0.32 1.0</ambient>
+          <diffuse>0.12 0.68 0.32 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="stopline">
+      <visual name="stopline_v">
+        <pose>0 0.28 0.011 0 0 0</pose>
+        <geometry><box><size>1.1 0.06 0.012</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_0_6_0_6">
+      <visual name="bollard_0_6_0_6_v">
+        <pose>0.6 0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_0_6_m0_6">
+      <visual name="bollard_0_6_m0_6_v">
+        <pose>0.6 -0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_m0_6_0_6">
+      <visual name="bollard_m0_6_0_6_v">
+        <pose>-0.6 0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_m0_6_m0_6">
+      <visual name="bollard_m0_6_m0_6_v">
+        <pose>-0.6 -0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="pallet">
+      <visual name="pallet_v">
+        <pose>0.85 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.9 0.7 0.1</size></box></geometry>
+        <material>
+          <ambient>0.55 0.35 0.15 1.0</ambient>
+          <diffuse>0.55 0.35 0.15 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="pallet_c">
+        <pose>0.85 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.9 0.7 0.1</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="goods1">
+      <visual name="goods1_v">
+        <pose>0.85 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="goods1_c">
+        <pose>0.85 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="goods2">
+      <visual name="goods2_v">
+        <pose>0.85 0 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="goods2_c">
+        <pose>0.85 0 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="station_pickup_s">
+    <static>true</static>
+    <pose>0.0 -6.8 0 0 0 1.5707963</pose>
+    <link name="zone">
+      <visual name="zone_v">
+        <pose>0 0 0.01 0 0 0</pose>
+        <geometry><box><size>1.2 1.2 0.02</size></box></geometry>
+        <material>
+          <ambient>0.12 0.68 0.32 1.0</ambient>
+          <diffuse>0.12 0.68 0.32 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="stopline">
+      <visual name="stopline_v">
+        <pose>0 0.28 0.011 0 0 0</pose>
+        <geometry><box><size>1.1 0.06 0.012</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_0_6_0_6">
+      <visual name="bollard_0_6_0_6_v">
+        <pose>0.6 0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_0_6_m0_6">
+      <visual name="bollard_0_6_m0_6_v">
+        <pose>0.6 -0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_m0_6_0_6">
+      <visual name="bollard_m0_6_0_6_v">
+        <pose>-0.6 0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_m0_6_m0_6">
+      <visual name="bollard_m0_6_m0_6_v">
+        <pose>-0.6 -0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="pallet">
+      <visual name="pallet_v">
+        <pose>-0.85 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.9 0.7 0.1</size></box></geometry>
+        <material>
+          <ambient>0.55 0.35 0.15 1.0</ambient>
+          <diffuse>0.55 0.35 0.15 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="pallet_c">
+        <pose>-0.85 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.9 0.7 0.1</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="goods1">
+      <visual name="goods1_v">
+        <pose>-0.85 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="goods1_c">
+        <pose>-0.85 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="goods2">
+      <visual name="goods2_v">
+        <pose>-0.85 0 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="goods2_c">
+        <pose>-0.85 0 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="station_dropoff_nw">
+    <static>true</static>
+    <pose>-10.4 6.8 0 0 0 0.0</pose>
+    <link name="zone">
+      <visual name="zone_v">
+        <pose>0 0 0.01 0 0 0</pose>
+        <geometry><box><size>1.2 1.2 0.02</size></box></geometry>
+        <material>
+          <ambient>0.15 0.42 0.85 1.0</ambient>
+          <diffuse>0.15 0.42 0.85 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="stopline">
+      <visual name="stopline_v">
+        <pose>0 0.28 0.011 0 0 0</pose>
+        <geometry><box><size>1.1 0.06 0.012</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_0_6_0_6">
+      <visual name="bollard_0_6_0_6_v">
+        <pose>0.6 0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_0_6_m0_6">
+      <visual name="bollard_0_6_m0_6_v">
+        <pose>0.6 -0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_m0_6_0_6">
+      <visual name="bollard_m0_6_0_6_v">
+        <pose>-0.6 0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_m0_6_m0_6">
+      <visual name="bollard_m0_6_m0_6_v">
+        <pose>-0.6 -0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="pallet">
+      <visual name="pallet_v">
+        <pose>-0.85 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.9 0.7 0.1</size></box></geometry>
+        <material>
+          <ambient>0.55 0.35 0.15 1.0</ambient>
+          <diffuse>0.55 0.35 0.15 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="pallet_c">
+        <pose>-0.85 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.9 0.7 0.1</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="goods1">
+      <visual name="goods1_v">
+        <pose>-0.85 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="goods1_c">
+        <pose>-0.85 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="goods2">
+      <visual name="goods2_v">
+        <pose>-0.85 0 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="goods2_c">
+        <pose>-0.85 0 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="station_dropoff_ne">
+    <static>true</static>
+    <pose>10.4 6.8 0 0 0 0.0</pose>
+    <link name="zone">
+      <visual name="zone_v">
+        <pose>0 0 0.01 0 0 0</pose>
+        <geometry><box><size>1.2 1.2 0.02</size></box></geometry>
+        <material>
+          <ambient>0.15 0.42 0.85 1.0</ambient>
+          <diffuse>0.15 0.42 0.85 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="stopline">
+      <visual name="stopline_v">
+        <pose>0 0.28 0.011 0 0 0</pose>
+        <geometry><box><size>1.1 0.06 0.012</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_0_6_0_6">
+      <visual name="bollard_0_6_0_6_v">
+        <pose>0.6 0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_0_6_m0_6">
+      <visual name="bollard_0_6_m0_6_v">
+        <pose>0.6 -0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_m0_6_0_6">
+      <visual name="bollard_m0_6_0_6_v">
+        <pose>-0.6 0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_m0_6_m0_6">
+      <visual name="bollard_m0_6_m0_6_v">
+        <pose>-0.6 -0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="pallet">
+      <visual name="pallet_v">
+        <pose>0.85 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.9 0.7 0.1</size></box></geometry>
+        <material>
+          <ambient>0.55 0.35 0.15 1.0</ambient>
+          <diffuse>0.55 0.35 0.15 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="pallet_c">
+        <pose>0.85 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.9 0.7 0.1</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="goods1">
+      <visual name="goods1_v">
+        <pose>0.85 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="goods1_c">
+        <pose>0.85 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="goods2">
+      <visual name="goods2_v">
+        <pose>0.85 0 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="goods2_c">
+        <pose>0.85 0 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="station_dropoff_sw">
+    <static>true</static>
+    <pose>-10.4 -6.8 0 0 0 0.0</pose>
+    <link name="zone">
+      <visual name="zone_v">
+        <pose>0 0 0.01 0 0 0</pose>
+        <geometry><box><size>1.2 1.2 0.02</size></box></geometry>
+        <material>
+          <ambient>0.15 0.42 0.85 1.0</ambient>
+          <diffuse>0.15 0.42 0.85 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="stopline">
+      <visual name="stopline_v">
+        <pose>0 0.28 0.011 0 0 0</pose>
+        <geometry><box><size>1.1 0.06 0.012</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_0_6_0_6">
+      <visual name="bollard_0_6_0_6_v">
+        <pose>0.6 0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_0_6_m0_6">
+      <visual name="bollard_0_6_m0_6_v">
+        <pose>0.6 -0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_m0_6_0_6">
+      <visual name="bollard_m0_6_0_6_v">
+        <pose>-0.6 0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_m0_6_m0_6">
+      <visual name="bollard_m0_6_m0_6_v">
+        <pose>-0.6 -0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="pallet">
+      <visual name="pallet_v">
+        <pose>-0.85 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.9 0.7 0.1</size></box></geometry>
+        <material>
+          <ambient>0.55 0.35 0.15 1.0</ambient>
+          <diffuse>0.55 0.35 0.15 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="pallet_c">
+        <pose>-0.85 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.9 0.7 0.1</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="goods1">
+      <visual name="goods1_v">
+        <pose>-0.85 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="goods1_c">
+        <pose>-0.85 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="goods2">
+      <visual name="goods2_v">
+        <pose>-0.85 0 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="goods2_c">
+        <pose>-0.85 0 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="station_dropoff_se">
+    <static>true</static>
+    <pose>10.4 -6.8 0 0 0 0.0</pose>
+    <link name="zone">
+      <visual name="zone_v">
+        <pose>0 0 0.01 0 0 0</pose>
+        <geometry><box><size>1.2 1.2 0.02</size></box></geometry>
+        <material>
+          <ambient>0.15 0.42 0.85 1.0</ambient>
+          <diffuse>0.15 0.42 0.85 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="stopline">
+      <visual name="stopline_v">
+        <pose>0 0.28 0.011 0 0 0</pose>
+        <geometry><box><size>1.1 0.06 0.012</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_0_6_0_6">
+      <visual name="bollard_0_6_0_6_v">
+        <pose>0.6 0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_0_6_m0_6">
+      <visual name="bollard_0_6_m0_6_v">
+        <pose>0.6 -0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_m0_6_0_6">
+      <visual name="bollard_m0_6_0_6_v">
+        <pose>-0.6 0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="bollard_m0_6_m0_6">
+      <visual name="bollard_m0_6_m0_6_v">
+        <pose>-0.6 -0.6 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.035</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.92 0.75 0.12 1.0</ambient>
+          <diffuse>0.92 0.75 0.12 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="pallet">
+      <visual name="pallet_v">
+        <pose>0.85 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.9 0.7 0.1</size></box></geometry>
+        <material>
+          <ambient>0.55 0.35 0.15 1.0</ambient>
+          <diffuse>0.55 0.35 0.15 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="pallet_c">
+        <pose>0.85 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.9 0.7 0.1</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="goods1">
+      <visual name="goods1_v">
+        <pose>0.85 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.2 0.5 0.9 1.0</ambient>
+          <diffuse>0.2 0.5 0.9 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="goods1_c">
+        <pose>0.85 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="goods2">
+      <visual name="goods2_v">
+        <pose>0.85 0 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="goods2_c">
+        <pose>0.85 0 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="charger_0">
+    <static>true</static>
+    <pose>-11.0 3.6 0 0 0 3.1415927</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.01 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.02</size></box></geometry>
+        <material>
+          <ambient>0.95 0.8 0.15 1.0</ambient>
+          <diffuse>0.95 0.8 0.15 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="body">
+      <visual name="body_v">
+        <pose>0.55 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.24 0.24 0.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="body_c">
+        <pose>0.55 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.24 0.24 0.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="led">
+      <visual name="led_v">
+        <pose>0.55 0 0.53 0 0 0</pose>
+        <geometry><cylinder><radius>0.02</radius><length>0.03</length></cylinder></geometry>
+        <material>
+          <ambient>0.12 0.68 0.32 1.0</ambient>
+          <diffuse>0.12 0.68 0.32 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="led_c">
+        <pose>0.55 0 0.53 0 0 0</pose>
+        <geometry><cylinder><radius>0.02</radius><length>0.03</length></cylinder></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="charger_1">
+    <static>true</static>
+    <pose>11.0 3.6 0 0 0 0.0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.01 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.02</size></box></geometry>
+        <material>
+          <ambient>0.95 0.8 0.15 1.0</ambient>
+          <diffuse>0.95 0.8 0.15 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="body">
+      <visual name="body_v">
+        <pose>0.55 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.24 0.24 0.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="body_c">
+        <pose>0.55 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.24 0.24 0.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="led">
+      <visual name="led_v">
+        <pose>0.55 0 0.53 0 0 0</pose>
+        <geometry><cylinder><radius>0.02</radius><length>0.03</length></cylinder></geometry>
+        <material>
+          <ambient>0.12 0.68 0.32 1.0</ambient>
+          <diffuse>0.12 0.68 0.32 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="led_c">
+        <pose>0.55 0 0.53 0 0 0</pose>
+        <geometry><cylinder><radius>0.02</radius><length>0.03</length></cylinder></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="charger_2">
+    <static>true</static>
+    <pose>11.0 -3.6 0 0 0 0.0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.01 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.02</size></box></geometry>
+        <material>
+          <ambient>0.95 0.8 0.15 1.0</ambient>
+          <diffuse>0.95 0.8 0.15 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="body">
+      <visual name="body_v">
+        <pose>0.55 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.24 0.24 0.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="body_c">
+        <pose>0.55 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.24 0.24 0.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="led">
+      <visual name="led_v">
+        <pose>0.55 0 0.53 0 0 0</pose>
+        <geometry><cylinder><radius>0.02</radius><length>0.03</length></cylinder></geometry>
+        <material>
+          <ambient>0.12 0.68 0.32 1.0</ambient>
+          <diffuse>0.12 0.68 0.32 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="led_c">
+        <pose>0.55 0 0.53 0 0 0</pose>
+        <geometry><cylinder><radius>0.02</radius><length>0.03</length></cylinder></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="charger_3">
+    <static>true</static>
+    <pose>-11.0 -3.6 0 0 0 3.1415927</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.01 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.02</size></box></geometry>
+        <material>
+          <ambient>0.95 0.8 0.15 1.0</ambient>
+          <diffuse>0.95 0.8 0.15 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="body">
+      <visual name="body_v">
+        <pose>0.55 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.24 0.24 0.5</size></box></geometry>
+        <material>
+          <ambient>0.28 0.36 0.5 1.0</ambient>
+          <diffuse>0.28 0.36 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="body_c">
+        <pose>0.55 0 0.25 0 0 0</pose>
+        <geometry><box><size>0.24 0.24 0.5</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="led">
+      <visual name="led_v">
+        <pose>0.55 0 0.53 0 0 0</pose>
+        <geometry><cylinder><radius>0.02</radius><length>0.03</length></cylinder></geometry>
+        <material>
+          <ambient>0.12 0.68 0.32 1.0</ambient>
+          <diffuse>0.12 0.68 0.32 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="led_c">
+        <pose>0.55 0 0.53 0 0 0</pose>
+        <geometry><cylinder><radius>0.02</radius><length>0.03</length></cylinder></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="rack_bay_0">
+    <static>true</static>
+    <pose>-7.0 3.6 0 0 0 0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry><box><size>0.6 0.4 0.005</size></box></geometry>
+        <material>
+          <ambient>0.35 0.55 0.75 1.0</ambient>
+          <diffuse>0.35 0.55 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_bay_1">
+    <static>true</static>
+    <pose>-4.2 3.6 0 0 0 0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry><box><size>0.6 0.4 0.005</size></box></geometry>
+        <material>
+          <ambient>0.35 0.55 0.75 1.0</ambient>
+          <diffuse>0.35 0.55 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_bay_2">
+    <static>true</static>
+    <pose>-1.4 3.6 0 0 0 0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry><box><size>0.6 0.4 0.005</size></box></geometry>
+        <material>
+          <ambient>0.35 0.55 0.75 1.0</ambient>
+          <diffuse>0.35 0.55 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_bay_3">
+    <static>true</static>
+    <pose>1.4 3.6 0 0 0 0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry><box><size>0.6 0.4 0.005</size></box></geometry>
+        <material>
+          <ambient>0.35 0.55 0.75 1.0</ambient>
+          <diffuse>0.35 0.55 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_bay_4">
+    <static>true</static>
+    <pose>4.2 3.6 0 0 0 0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry><box><size>0.6 0.4 0.005</size></box></geometry>
+        <material>
+          <ambient>0.35 0.55 0.75 1.0</ambient>
+          <diffuse>0.35 0.55 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_bay_5">
+    <static>true</static>
+    <pose>7.0 3.6 0 0 0 0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry><box><size>0.6 0.4 0.005</size></box></geometry>
+        <material>
+          <ambient>0.35 0.55 0.75 1.0</ambient>
+          <diffuse>0.35 0.55 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_bay_6">
+    <static>true</static>
+    <pose>-7.0 -3.6 0 0 0 0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry><box><size>0.6 0.4 0.005</size></box></geometry>
+        <material>
+          <ambient>0.35 0.55 0.75 1.0</ambient>
+          <diffuse>0.35 0.55 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_bay_7">
+    <static>true</static>
+    <pose>-4.2 -3.6 0 0 0 0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry><box><size>0.6 0.4 0.005</size></box></geometry>
+        <material>
+          <ambient>0.35 0.55 0.75 1.0</ambient>
+          <diffuse>0.35 0.55 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_bay_8">
+    <static>true</static>
+    <pose>-1.4 -3.6 0 0 0 0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry><box><size>0.6 0.4 0.005</size></box></geometry>
+        <material>
+          <ambient>0.35 0.55 0.75 1.0</ambient>
+          <diffuse>0.35 0.55 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_bay_9">
+    <static>true</static>
+    <pose>1.4 -3.6 0 0 0 0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry><box><size>0.6 0.4 0.005</size></box></geometry>
+        <material>
+          <ambient>0.35 0.55 0.75 1.0</ambient>
+          <diffuse>0.35 0.55 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_bay_10">
+    <static>true</static>
+    <pose>4.2 -3.6 0 0 0 0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry><box><size>0.6 0.4 0.005</size></box></geometry>
+        <material>
+          <ambient>0.35 0.55 0.75 1.0</ambient>
+          <diffuse>0.35 0.55 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="rack_bay_11">
+    <static>true</static>
+    <pose>7.0 -3.6 0 0 0 0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry><box><size>0.6 0.4 0.005</size></box></geometry>
+        <material>
+          <ambient>0.35 0.55 0.75 1.0</ambient>
+          <diffuse>0.35 0.55 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="port_pad_0">
+    <static>true</static>
+    <pose>-6.0 6.8 0 0 0 0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry><box><size>1.2 0.5 0.005</size></box></geometry>
+        <material>
+          <ambient>0.35 0.55 0.75 1.0</ambient>
+          <diffuse>0.35 0.55 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="port_pad_1">
+    <static>true</static>
+    <pose>6.0 6.8 0 0 0 0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry><box><size>1.2 0.5 0.005</size></box></geometry>
+        <material>
+          <ambient>0.35 0.55 0.75 1.0</ambient>
+          <diffuse>0.35 0.55 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="port_pad_2">
+    <static>true</static>
+    <pose>-6.0 -6.8 0 0 0 0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry><box><size>1.2 0.5 0.005</size></box></geometry>
+        <material>
+          <ambient>0.35 0.55 0.75 1.0</ambient>
+          <diffuse>0.35 0.55 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="port_pad_3">
+    <static>true</static>
+    <pose>6.0 -6.8 0 0 0 0</pose>
+    <link name="pad">
+      <visual name="pad_v">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry><box><size>1.2 0.5 0.005</size></box></geometry>
+        <material>
+          <ambient>0.35 0.55 0.75 1.0</ambient>
+          <diffuse>0.35 0.55 0.75 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="control_room">
+    <static>true</static>
+    <!-- ★ 2026-09-27：5.0→5.6 平移到 c4/c5 走廊正中（走廊 x 4.5~6.7）。
+         原 5.0 时西半边 (4.0~4.5) 压进 rack_r0_c4 (3.9~4.5)，与货架物理重叠。 -->
+    <pose>5.6 5.2 0 0 0 0</pose>
+    <link name="floor">
+      <visual name="floor_v">
+        <pose>0 0 0.01 0 0 0</pose>
+        <geometry><box><size>2.0 1.5 0.02</size></box></geometry>
+        <material>
+          <ambient>0.5 0.5 0.55 1.0</ambient>
+          <diffuse>0.5 0.5 0.55 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="floor_c">
+        <pose>0 0 0.01 0 0 0</pose>
+        <geometry><box><size>2.0 1.5 0.02</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="wall_east">
+      <visual name="wall_east_v">
+        <pose>1.0 0 0.6 0 0 0</pose>
+        <geometry><box><size>0.1 1.5 1.2</size></box></geometry>
+        <material>
+          <ambient>0.78 0.78 0.8 1.0</ambient>
+          <diffuse>0.78 0.78 0.8 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="wall_east_c">
+        <pose>1.0 0 0.6 0 0 0</pose>
+        <geometry><box><size>0.1 1.5 1.2</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="wall_north">
+      <visual name="wall_north_v">
+        <pose>0 0.75 0.6 0 0 0</pose>
+        <geometry><box><size>2.0 0.1 1.2</size></box></geometry>
+        <material>
+          <ambient>0.78 0.78 0.8 1.0</ambient>
+          <diffuse>0.78 0.78 0.8 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="wall_north_c">
+        <pose>0 0.75 0.6 0 0 0</pose>
+        <geometry><box><size>2.0 0.1 1.2</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="wall_south">
+      <visual name="wall_south_v">
+        <pose>0 -0.75 0.6 0 0 0</pose>
+        <geometry><box><size>2.0 0.1 1.2</size></box></geometry>
+        <material>
+          <ambient>0.78 0.78 0.8 1.0</ambient>
+          <diffuse>0.78 0.78 0.8 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="wall_south_c">
+        <pose>0 -0.75 0.6 0 0 0</pose>
+        <geometry><box><size>2.0 0.1 1.2</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="desk">
+      <visual name="desk_v">
+        <pose>0 -0.35 0.2 0 0 0</pose>
+        <geometry><box><size>1.2 0.4 0.4</size></box></geometry>
+        <material>
+          <ambient>0.55 0.35 0.15 1.0</ambient>
+          <diffuse>0.55 0.35 0.15 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="desk_c">
+        <pose>0 -0.35 0.2 0 0 0</pose>
+        <geometry><box><size>1.2 0.4 0.4</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="monitor">
+      <visual name="monitor_v">
+        <pose>0 -0.27 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.02 0.35</size></box></geometry>
+        <material>
+          <ambient>0.12 0.12 0.15 1.0</ambient>
+          <diffuse>0.12 0.12 0.15 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="monitor_c">
+        <pose>0 -0.27 0.55 0 0 0</pose>
+        <geometry><box><size>0.4 0.02 0.35</size></box></geometry>
+      </collision>
+    </link>
+
+    <link name="chair">
+      <visual name="chair_v">
+        <pose>0.15 0.05 0.225 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.45</size></box></geometry>
+        <material>
+          <ambient>0.2 0.25 0.35 1.0</ambient>
+          <diffuse>0.2 0.25 0.35 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="chair_c">
+        <pose>0.15 0.05 0.225 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.45</size></box></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="fire_ext_1">
+    <static>true</static>
+    <pose>0 7.5 0 0 0 0</pose>
+    <link name="body">
+      <visual name="body_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.05</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="body_c">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.05</radius><length>0.5</length></cylinder></geometry>
+      </collision>
+    </link>
+
+    <link name="top">
+      <visual name="top_v">
+        <pose>0 0 0.52 0 0 0</pose>
+        <geometry><cylinder><radius>0.02</radius><length>0.05</length></cylinder></geometry>
+        <material>
+          <ambient>0.12 0.12 0.15 1.0</ambient>
+          <diffuse>0.12 0.12 0.15 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="top_c">
+        <pose>0 0 0.52 0 0 0</pose>
+        <geometry><cylinder><radius>0.02</radius><length>0.05</length></cylinder></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="fire_ext_2">
+    <static>true</static>
+    <pose>0 -7.5 0 0 0 0</pose>
+    <link name="body">
+      <visual name="body_v">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.05</radius><length>0.5</length></cylinder></geometry>
+        <material>
+          <ambient>0.85 0.2 0.2 1.0</ambient>
+          <diffuse>0.85 0.2 0.2 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="body_c">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.05</radius><length>0.5</length></cylinder></geometry>
+      </collision>
+    </link>
+
+    <link name="top">
+      <visual name="top_v">
+        <pose>0 0 0.52 0 0 0</pose>
+        <geometry><cylinder><radius>0.02</radius><length>0.05</length></cylinder></geometry>
+        <material>
+          <ambient>0.12 0.12 0.15 1.0</ambient>
+          <diffuse>0.12 0.12 0.15 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="top_c">
+        <pose>0 0 0.52 0 0 0</pose>
+        <geometry><cylinder><radius>0.02</radius><length>0.05</length></cylinder></geometry>
+      </collision>
+    </link>
+  </model>
+
+  <model name="lane_main">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+    <link name="dash_0">
+      <visual name="dash_0_v">
+        <pose>-11.4 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_1">
+      <visual name="dash_1_v">
+        <pose>-10.4 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_2">
+      <visual name="dash_2_v">
+        <pose>-9.4 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_3">
+      <visual name="dash_3_v">
+        <pose>-8.4 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_4">
+      <visual name="dash_4_v">
+        <pose>-7.4 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_5">
+      <visual name="dash_5_v">
+        <pose>-6.4 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_6">
+      <visual name="dash_6_v">
+        <pose>-5.4 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_7">
+      <visual name="dash_7_v">
+        <pose>-4.4 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_8">
+      <visual name="dash_8_v">
+        <pose>-3.4000000000000004 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_9">
+      <visual name="dash_9_v">
+        <pose>-2.4000000000000004 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_10">
+      <visual name="dash_10_v">
+        <pose>-1.4000000000000004 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_11">
+      <visual name="dash_11_v">
+        <pose>-0.40000000000000036 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_12">
+      <visual name="dash_12_v">
+        <pose>0.5999999999999996 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_13">
+      <visual name="dash_13_v">
+        <pose>1.5999999999999996 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_14">
+      <visual name="dash_14_v">
+        <pose>2.5999999999999996 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_15">
+      <visual name="dash_15_v">
+        <pose>3.5999999999999996 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_16">
+      <visual name="dash_16_v">
+        <pose>4.6 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_17">
+      <visual name="dash_17_v">
+        <pose>5.6 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_18">
+      <visual name="dash_18_v">
+        <pose>6.6 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_19">
+      <visual name="dash_19_v">
+        <pose>7.6 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_20">
+      <visual name="dash_20_v">
+        <pose>8.6 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_21">
+      <visual name="dash_21_v">
+        <pose>9.6 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_22">
+      <visual name="dash_22_v">
+        <pose>10.6 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="lane_north">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+    <link name="dash_0">
+      <visual name="dash_0_v">
+        <pose>-11.4 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_1">
+      <visual name="dash_1_v">
+        <pose>-10.4 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_2">
+      <visual name="dash_2_v">
+        <pose>-9.4 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_3">
+      <visual name="dash_3_v">
+        <pose>-8.4 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_4">
+      <visual name="dash_4_v">
+        <pose>-7.4 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_5">
+      <visual name="dash_5_v">
+        <pose>-6.4 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_6">
+      <visual name="dash_6_v">
+        <pose>-5.4 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_7">
+      <visual name="dash_7_v">
+        <pose>-4.4 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_8">
+      <visual name="dash_8_v">
+        <pose>-3.4000000000000004 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_9">
+      <visual name="dash_9_v">
+        <pose>-2.4000000000000004 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_10">
+      <visual name="dash_10_v">
+        <pose>-1.4000000000000004 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_11">
+      <visual name="dash_11_v">
+        <pose>-0.40000000000000036 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_12">
+      <visual name="dash_12_v">
+        <pose>0.5999999999999996 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_13">
+      <visual name="dash_13_v">
+        <pose>1.5999999999999996 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_14">
+      <visual name="dash_14_v">
+        <pose>2.5999999999999996 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_15">
+      <visual name="dash_15_v">
+        <pose>3.5999999999999996 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_16">
+      <visual name="dash_16_v">
+        <pose>4.6 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_17">
+      <visual name="dash_17_v">
+        <pose>5.6 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_18">
+      <visual name="dash_18_v">
+        <pose>6.6 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_19">
+      <visual name="dash_19_v">
+        <pose>7.6 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_20">
+      <visual name="dash_20_v">
+        <pose>8.6 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_21">
+      <visual name="dash_21_v">
+        <pose>9.6 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_22">
+      <visual name="dash_22_v">
+        <pose>10.6 3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="lane_south">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+    <link name="dash_0">
+      <visual name="dash_0_v">
+        <pose>-11.4 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_1">
+      <visual name="dash_1_v">
+        <pose>-10.4 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_2">
+      <visual name="dash_2_v">
+        <pose>-9.4 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_3">
+      <visual name="dash_3_v">
+        <pose>-8.4 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_4">
+      <visual name="dash_4_v">
+        <pose>-7.4 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_5">
+      <visual name="dash_5_v">
+        <pose>-6.4 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_6">
+      <visual name="dash_6_v">
+        <pose>-5.4 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_7">
+      <visual name="dash_7_v">
+        <pose>-4.4 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_8">
+      <visual name="dash_8_v">
+        <pose>-3.4000000000000004 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_9">
+      <visual name="dash_9_v">
+        <pose>-2.4000000000000004 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_10">
+      <visual name="dash_10_v">
+        <pose>-1.4000000000000004 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_11">
+      <visual name="dash_11_v">
+        <pose>-0.40000000000000036 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_12">
+      <visual name="dash_12_v">
+        <pose>0.5999999999999996 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_13">
+      <visual name="dash_13_v">
+        <pose>1.5999999999999996 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_14">
+      <visual name="dash_14_v">
+        <pose>2.5999999999999996 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_15">
+      <visual name="dash_15_v">
+        <pose>3.5999999999999996 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_16">
+      <visual name="dash_16_v">
+        <pose>4.6 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_17">
+      <visual name="dash_17_v">
+        <pose>5.6 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_18">
+      <visual name="dash_18_v">
+        <pose>6.6 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_19">
+      <visual name="dash_19_v">
+        <pose>7.6 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_20">
+      <visual name="dash_20_v">
+        <pose>8.6 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_21">
+      <visual name="dash_21_v">
+        <pose>9.6 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="dash_22">
+      <visual name="dash_22_v">
+        <pose>10.6 -3.6 0.005 0 0 0</pose>
+        <geometry><box><size>0.5 0.1 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="safe_line_y105">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+    <link name="line">
+      <visual name="line_v">
+        <pose>0 1.05 0.005 0 0 0</pose>
+        <geometry><box><size>23.0 0.08 0.005</size></box></geometry>
+        <material>
+          <ambient>0.9 0.7 0.1 1.0</ambient>
+          <diffuse>0.9 0.7 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="safe_line_ym105">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+    <link name="line">
+      <visual name="line_v">
+        <pose>0 -1.05 0.005 0 0 0</pose>
+        <geometry><box><size>23.0 0.08 0.005</size></box></geometry>
+        <material>
+          <ambient>0.9 0.7 0.1 1.0</ambient>
+          <diffuse>0.9 0.7 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="safe_line_y295">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+    <link name="line">
+      <visual name="line_v">
+        <pose>0 2.95 0.005 0 0 0</pose>
+        <geometry><box><size>23.0 0.08 0.005</size></box></geometry>
+        <material>
+          <ambient>0.9 0.7 0.1 1.0</ambient>
+          <diffuse>0.9 0.7 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="safe_line_y425">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+    <link name="line">
+      <visual name="line_v">
+        <pose>0 4.25 0.005 0 0 0</pose>
+        <geometry><box><size>23.0 0.08 0.005</size></box></geometry>
+        <material>
+          <ambient>0.9 0.7 0.1 1.0</ambient>
+          <diffuse>0.9 0.7 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="safe_line_ym295">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+    <link name="line">
+      <visual name="line_v">
+        <pose>0 -2.95 0.005 0 0 0</pose>
+        <geometry><box><size>23.0 0.08 0.005</size></box></geometry>
+        <material>
+          <ambient>0.9 0.7 0.1 1.0</ambient>
+          <diffuse>0.9 0.7 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="safe_line_ym425">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+    <link name="line">
+      <visual name="line_v">
+        <pose>0 -4.25 0.005 0 0 0</pose>
+        <geometry><box><size>23.0 0.08 0.005</size></box></geometry>
+        <material>
+          <ambient>0.9 0.7 0.1 1.0</ambient>
+          <diffuse>0.9 0.7 0.1 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="arrow_1">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+    <link name="shaft">
+      <visual name="shaft_v">
+        <pose>-6.0 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.56 0.14 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="fin1">
+      <visual name="fin1_v">
+        <pose>-5.7 -0.08 0.005 0 0 0.785</pose>
+        <geometry><box><size>0.18 0.07 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="fin2">
+      <visual name="fin2_v">
+        <pose>-5.7 0.08 0.005 0 0 -0.785</pose>
+        <geometry><box><size>0.18 0.07 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="arrow_2">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+    <link name="shaft">
+      <visual name="shaft_v">
+        <pose>-3.0 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.56 0.14 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="fin1">
+      <visual name="fin1_v">
+        <pose>-3.3 -0.08 0.005 0 0 -0.785</pose>
+        <geometry><box><size>0.18 0.07 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="fin2">
+      <visual name="fin2_v">
+        <pose>-3.3 0.08 0.005 0 0 0.785</pose>
+        <geometry><box><size>0.18 0.07 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="arrow_3">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+    <link name="shaft">
+      <visual name="shaft_v">
+        <pose>3.0 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.56 0.14 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="fin1">
+      <visual name="fin1_v">
+        <pose>3.3 -0.08 0.005 0 0 0.785</pose>
+        <geometry><box><size>0.18 0.07 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="fin2">
+      <visual name="fin2_v">
+        <pose>3.3 0.08 0.005 0 0 -0.785</pose>
+        <geometry><box><size>0.18 0.07 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="arrow_4">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+    <link name="shaft">
+      <visual name="shaft_v">
+        <pose>6.0 0.0 0.005 0 0 0</pose>
+        <geometry><box><size>0.56 0.14 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="fin1">
+      <visual name="fin1_v">
+        <pose>5.7 -0.08 0.005 0 0 -0.785</pose>
+        <geometry><box><size>0.18 0.07 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="fin2">
+      <visual name="fin2_v">
+        <pose>5.7 0.08 0.005 0 0 0.785</pose>
+        <geometry><box><size>0.18 0.07 0.005</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  </world>
+</sdf>

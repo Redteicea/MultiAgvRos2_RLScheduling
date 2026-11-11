@@ -1,0 +1,7 @@
+int32 task_id
+int32 priority        # 1=最高
+float64 pickup_x
+float64 pickup_y
+float64 dropoff_x
+float64 dropoff_y
+bool is_active

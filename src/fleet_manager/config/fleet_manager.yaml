@@ -1,0 +1,79 @@
+fleet_manager:
+  ros__parameters:
+    # ---- 车队配置（须与 spawn_robots.launch.py 中的 AGV 名称/出生位姿一致）----
+    robot_names: ["agv_0", "agv_1", "agv_2"]
+    # 静态 TF world -> /agv_X/odom 的出生位姿（仅用于 RViz 可视化）
+    robot_spawn_x: [-2.0, 0.5, 3.0]
+    robot_spawn_y: [0.0, 0.0, 0.0]
+    robot_spawn_yaw: [0.0, 0.0, 0.0]
+
+    # ---- 运动控制 ----
+    max_linear_speed: 0.5        # m/s
+    max_angular_speed: 1.0       # rad/s
+    goal_tolerance: 0.18         # m, 到达终点的判定阈值
+    waypoint_tolerance: 0.10     # m, 航点弹出阈值
+    turn_stop_factor: 1.2        # 转向时降速的强度系数
+    max_steer: 0.6               # rad, 最大前轮转向角（与 URDF max_steer 一致）
+    wheelbase: 0.32              # m, 轴距
+    min_turn_speed: 0.12         # m/s, 低速需转向时保持的最小前进速度（阿克曼不能原地转）
+
+    # ---- 任务流程 ----
+    dwell_time_pickup: 3.0       # s, 装货停靠时长
+    dwell_time_dropoff: 3.0      # s, 卸货停靠时长
+    allocator_interval: 0.5      # s, 任务分配周期
+
+    # ---- 路权 / 冲突 ----
+    robot_radius: 0.30           # m, 占位膨胀半径(含安全余量)
+    traffic_stop_distance: 0.55  # m, 与前车的最小跟停距离
+    stuck_timeout: 5.0           # s, 无进展判定死锁的超时
+    yield_backup: 0.30           # m, 避让时倒退距离
+
+    # ---- 电量 / 充电 ----
+    battery_drain_move: 0.05     # %/s, 移动耗电
+    battery_drain_idle: 0.005    # %/s, 待机耗电
+    battery_charge_rate: 1.0     # %/s, 充电速率
+    charge_threshold: 25.0       # %, 低于该值去充电
+    charge_full: 95.0            # %, 充到该值认为充满
+    battery_critical: 12.0       # %, 任务执行中低于该值则中断去充电
+
+    # ---- 充电桩位置（★ 地图 v2：从四角移到东西纵向通道中段贴墙，
+    #      四角让给了卸货站；桩体模型已后退 0.55m，停车位空出来给 AGV）----
+    charger_x: [-11.0, 11.0, 11.0, -11.0]
+    charger_y: [3.6, 3.6, -3.6, -3.6]
+
+    # ---- 状态发布 ----
+    status_period: 0.5           # s, /fleet/status 发布周期
+    marker_period: 0.5           # s, /fleet/markers 发布周期
+
+    # ---- 控制/调度周期 ----
+    control_rate: 20.0           # Hz
+
+    # ---- RL 任务分配（Phase 7）----
+    # ★ 2026-09-19 地图 v2.1（货架语义化）配套重训完成，已切回 RL ★
+    # ★ policy_v8（2026-09-22，地图 v3 拓扑）：**24 个任务点**（12 港 + 12 货架位）、
+    #   28 节点 / 31 边、obs_dim **331**（取/卸各 24 位 canonical one-hot）——
+    #   维度全变，**不能热启动 v7**（235→331）。
+    #   extreme 对比：MAPPO 完成率 0.370 vs 贪心 0.285（**+8.5pp**）。
+    #   注意：本版任务空间含"货架↔货架"的跨库长单，绝对完成率比 v7（0.395）低是
+    #   因为**任务变长**，不是策略变差 —— 要看 MAPPO 相对贪心的**增量**。
+    use_rl: true                  # true=MAPPO 策略分配；false=贪心最近分配
+    policy_path: "/home/howgreat/PersonalFile/4_MultiPPoAgv/rl_training/policy_v8_jit.pt"
+
+task_generator:
+  ros__parameters:
+    enable: true
+    interval_min: 6.0            # s（★ v3：加密派单，提高随机性与竞争度）
+    interval_max: 12.0           # s
+    max_active_tasks: 6          # 同时在途任务上限（★ v3：4→6）
+    # 任务取/放货点（★ v3 拓扑 2026-09-22：**24 个点**）
+    #   前 12 = 港（4 入库港 + 4 出库港 + **4 新增外港**：南/北外围通道中段）
+    #   后 12 = **货架拣货/补货位**（横向通道 y=±3.6，对齐新列 x=±1.4/±4.2/±7.0）
+    # ★ 取货与卸货**都用全部 24 点** → 四类任务由随机配对自然产生：
+    #     港↔港 穿梭 · 货架→港 拣货 · 港→货架 补货 · 货架↔货架 移库
+    #   必须与 C++ 的 siteCode / stations[12] / bays[12] 以及
+    #   rl_training/env/fleet_env.SITE_COORD 保持一致（同源，四处一起改）。
+    pickup_x:  [-10.4, 10.4, 0.0, 0.0,  -10.4, 10.4, -10.4, 10.4,  -6.0, 6.0, -6.0, 6.0,  -7.0, -4.2, -1.4, 1.4, 4.2, 7.0,  -7.0, -4.2, -1.4, 1.4, 4.2, 7.0]
+    pickup_y:  [0.0, 0.0, 6.8, -6.8,  6.8, 6.8, -6.8, -6.8,  6.8, 6.8, -6.8, -6.8,  3.6, 3.6, 3.6, 3.6, 3.6, 3.6,  -3.6, -3.6, -3.6, -3.6, -3.6, -3.6]
+    dropoff_x:  [-10.4, 10.4, 0.0, 0.0,  -10.4, 10.4, -10.4, 10.4,  -6.0, 6.0, -6.0, 6.0,  -7.0, -4.2, -1.4, 1.4, 4.2, 7.0,  -7.0, -4.2, -1.4, 1.4, 4.2, 7.0]
+    dropoff_y:  [0.0, 0.0, 6.8, -6.8,  6.8, 6.8, -6.8, -6.8,  6.8, 6.8, -6.8, -6.8,  3.6, 3.6, 3.6, 3.6, 3.6, 3.6,  -3.6, -3.6, -3.6, -3.6, -3.6, -3.6]
+    priorities: [1, 1, 2]        # 随机优先级取值

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot name="agv2" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="agv_core.urdf.xacro"/>
+  <xacro:arg name="robot_name" default="agv2"/>
+  <xacro:arg name="color" default="0.2 0.75 0.35 1.0"/>
+  <xacro:arg name="id" default="2"/>
+  <xacro:arg name="with_cargo" default="true"/>
+  <xacro:arg name="gazebo_mat" default="Gazebo/Green"/>
+
+  <xacro:agv_core 
+    robot_name="$(arg robot_name)" 
+    color="$(arg color)" 
+    id="$(arg id)"
+    with_cargo="$(arg with_cargo)"
+    gazebo_mat="$(arg gazebo_mat)"/>
+</robot>

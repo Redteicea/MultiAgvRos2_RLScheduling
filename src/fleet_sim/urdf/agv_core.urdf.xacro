@@ -1,0 +1,572 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="agv_core">
+
+  <!--
+    agv_core 宏：模拟仓储搬运 AGV（载货式 / 顶升式 AMR）
+    - 阿克曼转向：前轮绕 Z 轴转向（steering joint），后轮绕 Y 轴驱动，
+      由 libgazebo_ros_ackermann_drive 插件控制（订阅 ackermann_msgs/AckermannDrive）
+    - 前轮为从动转向轮，后轮为驱动轮（标准汽车式阿克曼结构）
+    - 车顶承载平台（可放置货物，无需机械臂）
+    - 车顶角落安装激光雷达（带 ray 传感器，输出 /agv_X/scan）
+    - 前后保险杠、状态指示灯、反光条
+    - 方向可辨识：雷达偏心安装 + 真值里程计保证 yaw 不锁反 180°
+      （早期版本靠“单侧立杆”提供激光平面内的自特征，2026-09 已移除，
+      详见 base_link_${id} 内注释）
+
+    坐标系约定：base_link_${id} 原点位于地面（z=0），+x 为前进方向，+y 为左侧。
+    车轮滚动轴沿 Y 方向（绕 Y 旋转）；前轮转向轴沿 Z 方向（绕 Z 摆动）。
+
+    注意：ROS2 urdfdom 不解析 <visual> 中通过 name 引用的顶层 <material> 颜色，
+    因此所有材质颜色必须内联写在 <visual><material> 里（用宏展开）。
+  -->
+  <xacro:macro name="agv_core" params="robot_name color id with_cargo:=true gazebo_mat:=Gazebo/Blue">
+
+    <!-- ================= 材质宏（内联到每个 visual） ================= -->
+    <xacro:macro name="body_mat" params="robot_name robot_color">
+      <material name="${robot_name}_body">
+        <color rgba="${robot_color}"/>
+      </material>
+    </xacro:macro>
+    <xacro:macro name="wheel_mat_block">
+      <material name="wheel_mat">
+        <color rgba="0.08 0.08 0.08 1.0"/>
+      </material>
+    </xacro:macro>
+    <xacro:macro name="platform_mat_block">
+      <material name="platform_mat">
+        <color rgba="0.55 0.57 0.6 1.0"/>
+      </material>
+    </xacro:macro>
+    <xacro:macro name="lidar_mat_block">
+      <material name="lidar_mat">
+        <color rgba="0.16 0.16 0.18 1.0"/>
+      </material>
+    </xacro:macro>
+    <xacro:macro name="led_front_mat_block">
+      <material name="led_front_mat">
+        <color rgba="0.85 0.9 1.0 1.0"/>
+      </material>
+    </xacro:macro>
+    <xacro:macro name="led_rear_mat_block">
+      <material name="led_rear_mat">
+        <color rgba="1.0 0.15 0.15 1.0"/>
+      </material>
+    </xacro:macro>
+    <xacro:macro name="bumper_mat_block">
+      <material name="bumper_mat">
+        <color rgba="0.2 0.2 0.22 1.0"/>
+      </material>
+    </xacro:macro>
+
+    <!-- ================= 底盘（车体） ================= -->
+    <link name="base_link_${id}">
+      <!-- 车体主体 -->
+      <visual>
+        <geometry><box size="0.5 0.38 0.08"/></geometry>
+        <origin xyz="0 0 0.15"/>
+        <xacro:body_mat robot_name="${robot_name}" robot_color="${color}"/>
+      </visual>
+      <!-- 前保险杠 -->
+      <visual>
+        <geometry><box size="0.04 0.34 0.1"/></geometry>
+        <origin xyz="0.24 0 0.14"/>
+        <xacro:bumper_mat_block/>
+      </visual>
+      <!-- 后保险杠 -->
+      <visual>
+        <geometry><box size="0.04 0.34 0.1"/></geometry>
+        <origin xyz="-0.24 0 0.14"/>
+        <xacro:bumper_mat_block/>
+      </visual>
+      <!-- 前方白色状态灯 -->
+      <visual>
+        <geometry><box size="0.02 0.24 0.03"/></geometry>
+        <origin xyz="0.26 0 0.175"/>
+        <xacro:led_front_mat_block/>
+      </visual>
+      <!-- 后方红色警示灯 -->
+      <visual>
+        <geometry><box size="0.02 0.24 0.03"/></geometry>
+        <origin xyz="-0.26 0 0.175"/>
+        <xacro:led_rear_mat_block/>
+      </visual>
+      <!-- 两侧黄色反光条 -->
+      <visual>
+        <geometry><box size="0.1 0.01 0.04"/></geometry>
+        <origin xyz="0.15 0.19 0.13"/>
+        <xacro:led_rear_mat_block/>
+      </visual>
+      <visual>
+        <geometry><box size="0.1 0.01 0.04"/></geometry>
+        <origin xyz="-0.15 0.19 0.13"/>
+        <xacro:led_rear_mat_block/>
+      </visual>
+      <visual>
+        <geometry><box size="0.1 0.01 0.04"/></geometry>
+        <origin xyz="0.15 -0.19 0.13"/>
+        <xacro:led_rear_mat_block/>
+      </visual>
+      <visual>
+        <geometry><box size="0.1 0.01 0.04"/></geometry>
+        <origin xyz="-0.15 -0.19 0.13"/>
+        <xacro:led_rear_mat_block/>
+      </visual>
+      <!-- 底盘碰撞体 + 惯量：2026-09 修复。此前一次“注释立杆”误把车体的
+           collision/inertial 一并注释掉，导致底盘无碰撞体积（车可互相穿模）、
+           base_link 无惯性（URDF 解析报错风险），此处恢复。 -->
+      <collision>
+        <geometry><box size="0.5 0.38 0.08"/></geometry>
+        <origin xyz="0 0 0.15"/>
+      </collision>
+      <inertial>
+        <mass value="20.0"/>
+        <inertia ixx="0.2513" ixy="0.0" ixz="0.0" iyy="0.4273" iyz="0.0" izz="0.6573"/>
+      </inertial>
+
+      <!-- 方向可辨识性说明（单侧立杆已于 2026-09 移除）：
+           激光平面 z≈0.325 高于车身(0.19)/平台(0.21)/货物(0.29)，移除立杆后扫描
+           无任何自车特征。yaw 的 180° 反锁防护改由下面两点承担，不再依赖立杆：
+             1) 雷达整体偏心安装于 (-0.14, 0.12)（不在车体对称轴/几何中心），
+                配合车身矩形轮廓，两个 π 反向位姿的扫描几何不一致；
+             2) 里程计 odometry_source=1(WORLD 真值)，且 initial_pose.yaw 与出生
+                朝向一致，AMCL 粒子初始不会分裂出 π 反态。
+           若改源后仍出现 180° 反锁（用 check_amcl_convergence.py 观察
+           mean_yaw≈±180°），应恢复一个“激光平面内可见”的低矮非对称特征点，
+           而不是把全向雷达移到车头（见下方雷达安装注释）。 -->
+    </link>
+
+    <!-- ================= 阿克曼底盘（前轮转向 + 后轮驱动） =================
+         布局：轴距(x)前/后各 ±0.16m（轴距 0.32m），轮距(y)左右各 ±0.17m（0.34m）。
+         前轮：steering joint（绕 Z 摆动实现转向）+ wheel joint（绕 Y 从动滚动）；
+         后轮：wheel joint（绕 Y，由 ackermann_drive 插件驱动）。
+         阿克曼转向靠前轮偏转产生曲率，无需 skid-steer 的轮子侧向滑动。 -->
+    <link name="front_left_steer_link_${id}">
+      <inertial>
+        <mass value="0.5"/>
+        <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+      </inertial>
+    </link>
+    <joint name="front_left_steer_joint_${id}" type="revolute">
+      <parent link="base_link_${id}"/><child link="front_left_steer_link_${id}"/>
+      <origin xyz="0.16 0.17 0.08"/>
+      <axis xyz="0 0 1"/>
+      <limit lower="-0.7" upper="0.7" effort="100" velocity="10"/>
+    </joint>
+    <link name="left_wheel_front_${id}">
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0 1.57 1.57"/>
+        <geometry><cylinder radius="0.08" length="0.08"/></geometry>
+        <xacro:wheel_mat_block/>
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 1.57 1.57"/>
+        <geometry><cylinder radius="0.08" length="0.08"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.8"/>
+        <inertia ixx="0.00200" ixy="0.0" ixz="0.0" iyy="0.00200" iyz="0.0" izz="0.00320"/>
+      </inertial>
+    </link>
+    <joint name="left_wheel_front_joint_${id}" type="continuous">
+      <parent link="front_left_steer_link_${id}"/><child link="left_wheel_front_${id}"/>
+      <origin xyz="0 0 0"/>
+      <axis xyz="0 1 0"/>
+      <dynamics damping="0.01"/>
+      <!-- ★★ 2026-09-23：**驱动轮必须显式给 effort 上限** ★★
+           `type="continuous"` 且没有 <limit> 时，Gazebo 默认把该关节的
+           effort 当 0 —— 阿克曼插件照常订阅 cmd_vel、照常 SetParam 速度，
+           但**关节出不了任何力矩** ⇒ 轮子纹丝不动、车身 0 位移（实测：直接手动
+           发 v=0.8 也 8 s 只挪 0.010 m）。
+           对照证据：转向关节 front_left_steer_joint_* 本来就带
+           <limit effort="100" velocity="10"/>，所以转向一直是好的；
+           四个驱动轮缺这一行，于是"转向会动、驱动不动"。
+           数值取与转向关节一致：effort=100 N·m、velocity=20 rad/s。 -->
+      <limit effort="100" velocity="20"/>
+    </joint>
+
+    <link name="front_right_steer_link_${id}">
+      <inertial>
+        <mass value="0.5"/>
+        <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+      </inertial>
+    </link>
+    <joint name="front_right_steer_joint_${id}" type="revolute">
+      <parent link="base_link_${id}"/><child link="front_right_steer_link_${id}"/>
+      <origin xyz="0.16 -0.17 0.08"/>
+      <axis xyz="0 0 1"/>
+      <limit lower="-0.7" upper="0.7" effort="100" velocity="10"/>
+    </joint>
+    <link name="right_wheel_front_${id}">
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0 1.57 1.57"/>
+        <geometry><cylinder radius="0.08" length="0.08"/></geometry>
+        <xacro:wheel_mat_block/>
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 1.57 1.57"/>
+        <geometry><cylinder radius="0.08" length="0.08"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.8"/>
+        <inertia ixx="0.00200" ixy="0.0" ixz="0.0" iyy="0.00200" iyz="0.0" izz="0.00320"/>
+      </inertial>
+    </link>
+    <joint name="right_wheel_front_joint_${id}" type="continuous">
+      <parent link="front_right_steer_link_${id}"/><child link="right_wheel_front_${id}"/>
+      <origin xyz="0 0 0"/>
+      <axis xyz="0 1 0"/>
+      <dynamics damping="0.01"/>
+      <!-- ★★ 2026-09-23：**驱动轮必须显式给 effort 上限** ★★
+           `type="continuous"` 且没有 <limit> 时，Gazebo 默认把该关节的
+           effort 当 0 —— 阿克曼插件照常订阅 cmd_vel、照常 SetParam 速度，
+           但**关节出不了任何力矩** ⇒ 轮子纹丝不动、车身 0 位移（实测：直接手动
+           发 v=0.8 也 8 s 只挪 0.010 m）。
+           对照证据：转向关节 front_left_steer_joint_* 本来就带
+           <limit effort="100" velocity="10"/>，所以转向一直是好的；
+           四个驱动轮缺这一行，于是"转向会动、驱动不动"。
+           数值取与转向关节一致：effort=100 N·m、velocity=20 rad/s。 -->
+      <limit effort="100" velocity="20"/>
+    </joint>
+
+    <link name="left_wheel_rear_${id}">
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0 1.57 1.57"/>
+        <geometry><cylinder radius="0.08" length="0.08"/></geometry>
+        <xacro:wheel_mat_block/>
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 1.57 1.57"/>
+        <geometry><cylinder radius="0.08" length="0.08"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.8"/>
+        <inertia ixx="0.00200" ixy="0.0" ixz="0.0" iyy="0.00200" iyz="0.0" izz="0.00320"/>
+      </inertial>
+    </link>
+    <joint name="left_wheel_rear_joint_${id}" type="continuous">
+      <parent link="base_link_${id}"/><child link="left_wheel_rear_${id}"/>
+      <origin xyz="-0.16 0.17 0.08"/>
+      <axis xyz="0 1 0"/>
+      <dynamics damping="0.01"/>
+      <!-- ★★ 2026-09-23：**驱动轮必须显式给 effort 上限** ★★
+           `type="continuous"` 且没有 <limit> 时，Gazebo 默认把该关节的
+           effort 当 0 —— 阿克曼插件照常订阅 cmd_vel、照常 SetParam 速度，
+           但**关节出不了任何力矩** ⇒ 轮子纹丝不动、车身 0 位移（实测：直接手动
+           发 v=0.8 也 8 s 只挪 0.010 m）。
+           对照证据：转向关节 front_left_steer_joint_* 本来就带
+           <limit effort="100" velocity="10"/>，所以转向一直是好的；
+           四个驱动轮缺这一行，于是"转向会动、驱动不动"。
+           数值取与转向关节一致：effort=100 N·m、velocity=20 rad/s。 -->
+      <limit effort="100" velocity="20"/>
+    </joint>
+
+    <link name="right_wheel_rear_${id}">
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0 1.57 1.57"/>
+        <geometry><cylinder radius="0.08" length="0.08"/></geometry>
+        <xacro:wheel_mat_block/>
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 1.57 1.57"/>
+        <geometry><cylinder radius="0.08" length="0.08"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.8"/>
+        <inertia ixx="0.00200" ixy="0.0" ixz="0.0" iyy="0.00200" iyz="0.0" izz="0.00320"/>
+      </inertial>
+    </link>
+    <joint name="right_wheel_rear_joint_${id}" type="continuous">
+      <parent link="base_link_${id}"/><child link="right_wheel_rear_${id}"/>
+      <origin xyz="-0.16 -0.17 0.08"/>
+      <axis xyz="0 1 0"/>
+      <dynamics damping="0.01"/>
+      <!-- ★★ 2026-09-23：**驱动轮必须显式给 effort 上限** ★★
+           `type="continuous"` 且没有 <limit> 时，Gazebo 默认把该关节的
+           effort 当 0 —— 阿克曼插件照常订阅 cmd_vel、照常 SetParam 速度，
+           但**关节出不了任何力矩** ⇒ 轮子纹丝不动、车身 0 位移（实测：直接手动
+           发 v=0.8 也 8 s 只挪 0.010 m）。
+           对照证据：转向关节 front_left_steer_joint_* 本来就带
+           <limit effort="100" velocity="10"/>，所以转向一直是好的；
+           四个驱动轮缺这一行，于是"转向会动、驱动不动"。
+           数值取与转向关节一致：effort=100 N·m、velocity=20 rad/s。 -->
+      <limit effort="100" velocity="20"/>
+    </joint>
+
+    <!-- ================= 承载平台（货物放置面） =================
+         注意：几何偏移写在 joint origin（link 相对 base 的位姿非零）。
+         若 joint 无 origin（零位姿），libsdformat 的 URDF→SDF 转换会把该
+         fixed 子 link 折叠(collapse)进父 link，导致 gazebo 里 link 缺失、
+         且挂载其上的 sensor 位姿丢失（激光掉到 z=0 贴地产生自扫伪影）。 -->
+    <link name="top_platform_${id}">
+      <visual>
+        <geometry><box size="0.46 0.34 0.02"/></geometry>
+        <origin xyz="0 0 0"/>
+        <xacro:platform_mat_block/>
+      </visual>
+      <collision>
+        <geometry><box size="0.46 0.34 0.02"/></geometry>
+        <origin xyz="0 0 0"/>
+      </collision>
+      <inertial>
+        <mass value="1.5"/>
+        <inertia ixx="0.0145" ixy="0.0" ixz="0.0" iyy="0.0265" iyz="0.0" izz="0.0409"/>
+      </inertial>
+    </link>
+    <joint name="top_platform_joint_${id}" type="fixed">
+      <parent link="base_link_${id}"/><child link="top_platform_${id}"/>
+      <origin xyz="0 0 0.20"/>
+    </joint>
+
+    <!-- ================= 激光雷达（车顶后角，360° 视野） =================
+         为什么装在车顶角落而不是车头“朝前探测”？
+           - 这颗雷达是“定位 + 避障”一体的全向传感器：AMCL 定位要把 360° 扫描
+             与地图似然匹配，DWB 局部避障要感知前/后/左/右；装车头只剩 ~180°
+             前向视场，倒车、原地旋转、双向行驶时信息不足。
+           - AGV 是差速车，调度中会倒车入位 / 原地掉头，只朝前的传感器在这些
+             动作中完全失效。
+           - 车头低位易被碰撞损坏，也容易被货架/货物遮挡；抬到 z=0.325 兼顾
+             全向视野、避开货物遮挡，又低于货架横梁常见高度。
+           - 360° 雷达若装在车体正中心，扫描图案在 yaw 翻转 180° 时不变，
+             会加剧 AMCL 反向混淆，因此装在 (-0.14,0.12) 偏置位（防 180° 反锁）。
+         若确有“车头近距防撞/对接”需求，应额外加装朝前小雷达或超声波，
+         它不能替代这颗全向定位雷达。 -->
+    <link name="lidar_link_${id}">
+      <!-- 各几何 origin 均相对本 link 原点（= 雷达主机中心），
+           link 相对 base 的偏移写在 lidar_joint origin（见下注释）。 -->
+      <!-- 安装柱 -->
+      <visual>
+        <geometry><cylinder radius="0.015" length="0.1"/></geometry>
+        <origin xyz="0 0 -0.065"/>
+        <xacro:platform_mat_block/>
+      </visual>
+      <!-- 雷达主体 -->
+      <visual>
+        <geometry><cylinder radius="0.04" length="0.05"/></geometry>
+        <origin xyz="0 0 0"/>
+        <xacro:lidar_mat_block/>
+      </visual>
+      <!-- 雷达顶部反光环 -->
+      <visual>
+        <geometry><cylinder radius="0.041" length="0.012"/></geometry>
+        <origin xyz="0 0 0.015"/>
+        <xacro:led_front_mat_block/>
+      </visual>
+      <!-- 无 collision：雷达主机装饰碰撞若保留，会与 laser 原点（= link 原点，
+           折叠后=joint origin）同心，ray 从自身碰撞体内部发出造成自命中近距假点。 -->
+      <inertial>
+        <mass value="0.15"/>
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+      </inertial>
+    </link>
+    <joint name="lidar_joint_${id}" type="fixed">
+      <parent link="base_link_${id}"/><child link="lidar_link_${id}"/>
+      <!-- 激光原点相对 base：(-0.14, 0.12, 0.325)。必须写在 joint origin，
+           否则 fixed 零位姿子 link 会被 libsdformat 折叠、sensor pose 丢失。 -->
+      <origin xyz="-0.14 0.12 0.325"/>
+    </joint>
+
+    <!-- ================= 雷达可见特征柱（beacon · 2026-09-19 新增） =================
+         为什么需要它：2D 雷达扫描平面在 z=0.325，而本车与邻车**最高的部件都是货箱
+         （z 0.22~0.29）** → 光束从车顶上方 3.5cm 掠过，**扫不到任何邻车**。
+         后果：nav2 只能"盲着"往前开，顶到别的 AGV 也不减速（详见 DEBUG_NOTES §2.17）。
+         这根细柱专门把高度覆盖到扫描平面，让邻车在雷达里"现形"。
+
+         三个不能破的约束（改动前务必读）：
+         1) 与雷达 (-0.14, 0.12) **对角且足够远**：本柱到雷达最近面约 0.42m。
+            故 nav2 的 `obstacle_min_range` 已同步从 0.3 提到 **0.50m**，
+            正好把"自命中"回波滤掉——否则它会变成随车移动的幻影障碍物（§2.7 同类坑）。
+            两处必须成对修改：只加柱子不改 min_range = 自残。
+         2) XY 必须落在车体脚印(0.5×0.38)与承载平台(0.46×0.34)内 →
+            不额外增加碰撞包络，窄道上不会蹭到货架立柱
+            （货架只有 4 根 0.06×0.06 立柱参与碰撞，层板/顶梁是纯视觉）。
+         3) 高度必须**跨过** 0.325 扫描平面：取 z 0.21~0.45（柱心 0.33，高 0.24），
+            下限贴平台顶面(0.21)便于安装。 -->
+    <link name="beacon_${id}">
+      <visual>
+        <geometry><box size="0.04 0.04 0.24"/></geometry>
+        <origin xyz="0 0 0"/>
+        <xacro:led_front_mat_block/>
+      </visual>
+      <!-- 必须有 collision：Gazebo 射线传感器只与 **collision** 几何求交，
+           纯 visual 的立柱在雷达里是"透明"的，加了等于没加。 -->
+      <collision>
+        <geometry><box size="0.04 0.04 0.24"/></geometry>
+        <origin xyz="0 0 0"/>
+      </collision>
+      <inertial>
+        <mass value="0.05"/>
+        <inertia ixx="0.000247" ixy="0.0" ixz="0.0" iyy="0.000247" iyz="0.0" izz="0.0000133"/>
+      </inertial>
+    </link>
+    <joint name="beacon_joint_${id}" type="fixed">
+      <parent link="base_link_${id}"/><child link="beacon_${id}"/>
+      <!-- 车头右前角（雷达在车尾左后角 → 取对角最远，满足约束 1）；
+           柱心 z=0.33 → 柱体跨 0.21~0.45，把 0.325 扫描平面夹在中间。 -->
+      <origin xyz="0.22 -0.16 0.33"/>
+    </joint>
+
+    <!-- ================= 货物（可选，模拟载货状态） ================= -->
+    <xacro:if value="${with_cargo}">
+      <link name="cargo_${id}">
+        <!-- 几何 origin 相对本 link（原点=货箱中心 0.02,0,0.255），
+             偏移写在 cargo_joint origin（防止 fixed 零位姿子 link 被折叠）。 -->
+        <visual>
+          <geometry><box size="0.3 0.2 0.07"/></geometry>
+          <origin xyz="0 0 0"/>
+          <xacro:body_mat robot_name="${robot_name}" robot_color="${color}"/>
+        </visual>
+        <!-- 货物封条线 -->
+        <visual>
+          <geometry><box size="0.31 0.01 0.075"/></geometry>
+          <origin xyz="0 0.09 0"/>
+          <xacro:platform_mat_block/>
+        </visual>
+        <collision>
+          <geometry><box size="0.3 0.2 0.07"/></geometry>
+          <origin xyz="0 0 0"/>
+        </collision>
+        <inertial>
+          <mass value="2.0"/>
+          <inertia ixx="0.0104" ixy="0.0" ixz="0.0" iyy="0.0188" iyz="0.0" izz="0.0217"/>
+        </inertial>
+      </link>
+      <joint name="cargo_joint_${id}" type="fixed">
+        <parent link="base_link_${id}"/><child link="cargo_${id}"/>
+        <origin xyz="0.02 0 0.255"/>
+      </joint>
+    </xacro:if>
+
+    <!-- ================= Gazebo 阿克曼驱动插件 =================
+         前轮转向（绕 Z 的 steering joint）+ 四轮驱动（绕 Y 的 wheel joint）。
+         订阅 geometry_msgs/Twist（cmd_vel），插件内部把 linear.x/angular.z 转成
+         阿克曼的 speed/steering_angle（kinematic bicycle 模型）。 -->
+    <gazebo>
+      <plugin name="ackermann_drive_${id}" filename="libgazebo_ros_ackermann_drive.so">
+        <ros><namespace>/agv_${id}</namespace></ros>
+        <update_rate>50</update_rate>
+        <!-- 四轮驱动关节（绕 Y） -->
+        <front_left_joint>left_wheel_front_joint_${id}</front_left_joint>
+        <front_right_joint>right_wheel_front_joint_${id}</front_right_joint>
+        <rear_left_joint>left_wheel_rear_joint_${id}</rear_left_joint>
+        <rear_right_joint>right_wheel_rear_joint_${id}</rear_right_joint>
+        <!-- 前轮转向关节（绕 Z） -->
+        <left_steering_joint>front_left_steer_joint_${id}</left_steering_joint>
+        <right_steering_joint>front_right_steer_joint_${id}</right_steering_joint>
+        <!-- 轮胎最大转向角(rad) -->
+        <max_steer>0.6</max_steer>
+        <!-- 转向关节最大角度(rad)：无转向盘，与 max_steer 一致 -->
+        <max_steering_angle>0.6</max_steering_angle>
+        <max_speed>1.0</max_speed>
+        <!-- PID（三值 = P I D）：steering 加小积分消除稳态误差，i_range 限幅防跑偏 -->
+        <linear_velocity_pid_gain>3 0 0</linear_velocity_pid_gain>
+        <linear_velocity_i_range>0 0</linear_velocity_i_range>
+        <left_steering_pid_gain>20 0.3 0</left_steering_pid_gain>
+        <left_steering_i_range>0.3 0.3</left_steering_i_range>
+        <right_steering_pid_gain>20 0.3 0</right_steering_pid_gain>
+        <right_steering_i_range>0.3 0.3</right_steering_i_range>
+        <!-- 里程计发布 -->
+        <publish_odom>true</publish_odom>
+        <publish_odom_tf>true</publish_odom_tf>
+        <odometry_frame>odom_${id}</odometry_frame>
+        <robot_base_frame>base_link_${id}</robot_base_frame>
+        <publish_wheel_tf>false</publish_wheel_tf>
+      </plugin>
+    </gazebo>
+
+    <!-- ================= Gazebo 激光雷达传感器 ================= -->
+    <gazebo reference="lidar_link_${id}">
+      <sensor type="ray" name="lidar_sensor_${id}">
+        <!-- pose 相对 lidar_link：link 原点已在 lidar_joint 移到雷达主机位置，
+             故 sensor 直接放 link 原点（0 0 0）。若在此保留旧的 -0.14 0.12 0.325
+             会与 joint origin 叠加造成双倍偏移。 -->
+        <pose>0 0 0 0 0 0</pose>
+        <update_rate>10</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>360</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.14159265</min_angle>
+              <max_angle>3.14159265</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.1</min>
+            <max>12.0</max>
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <plugin name="lidar_plugin_${id}" filename="libgazebo_ros_ray_sensor.so">
+          <ros>
+            <namespace>/agv_${id}</namespace>
+            <remapping>~/out:=scan</remapping>
+          </ros>
+          <output_type>sensor_msgs/LaserScan</output_type>
+          <frame_name>lidar_link_${id}</frame_name>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+    <!-- ================= Gazebo 渲染材质与轮子摩擦覆盖 =================
+         渲染：Gazebo Classic 某些环境下不读 <visual><material><color>，
+         这里显式为每个 link 指定内置材质作为双保险。
+         摩擦：四轮差速(skid-steer)转向需要轮子相对地面侧向滑动，用各向异性
+         摩擦 mu1(滚动方向)/mu2(侧向) 降低侧向阻力；轮子局部坐标系中滚动
+         方向为 +x（fdir1）。
+         2026-09-10 修复：mu2 原 0.35 过低，原地转向时轮子侧向打滑、滚动力
+         无法锚定地面传递绕 Z 力矩 → 只发角速度时车平移(滑行)+几乎不转。
+         实测 mu2 0.35→1.2 使纯角速度转向从 0.22° 提升到 31.58°(143 倍)。
+         取 1.0 作为平衡：兼顾原地转向抓地力与正常转弯的侧向滑动阻力。 -->
+    <gazebo reference="base_link_${id}">
+      <material>${gazebo_mat}</material>
+    </gazebo>
+    <gazebo reference="left_wheel_front_${id}">
+      <material>Gazebo/Black</material>
+      <!-- 2026-09-23：注释声称“滚动方向为 +x（fdir1）”，但代码里一直没有这一行
+           => mu1/mu2 实际作用在**默认轴**上，不是轮子的滚动/侧向方向 =>
+           摩擦参数名存实亡。这里补上。 -->
+      <fdir1>1 0 0</fdir1>
+      <mu1>1.2</mu1>
+      <mu2>1.2</mu2>
+    </gazebo>
+    <gazebo reference="right_wheel_front_${id}">
+      <material>Gazebo/Black</material>
+      <!-- 2026-09-23：注释声称“滚动方向为 +x（fdir1）”，但代码里一直没有这一行
+           => mu1/mu2 实际作用在**默认轴**上，不是轮子的滚动/侧向方向 =>
+           摩擦参数名存实亡。这里补上。 -->
+      <fdir1>1 0 0</fdir1>
+      <mu1>1.2</mu1>
+      <mu2>1.2</mu2>
+    </gazebo>
+    <gazebo reference="left_wheel_rear_${id}">
+      <material>Gazebo/Black</material>
+      <!-- 2026-09-23：注释声称“滚动方向为 +x（fdir1）”，但代码里一直没有这一行
+           => mu1/mu2 实际作用在**默认轴**上，不是轮子的滚动/侧向方向 =>
+           摩擦参数名存实亡。这里补上。 -->
+      <fdir1>1 0 0</fdir1>
+      <mu1>1.2</mu1>
+      <mu2>1.2</mu2>
+    </gazebo>
+    <gazebo reference="right_wheel_rear_${id}">
+      <material>Gazebo/Black</material>
+      <!-- 2026-09-23：注释声称“滚动方向为 +x（fdir1）”，但代码里一直没有这一行
+           => mu1/mu2 实际作用在**默认轴**上，不是轮子的滚动/侧向方向 =>
+           摩擦参数名存实亡。这里补上。 -->
+      <fdir1>1 0 0</fdir1>
+      <mu1>1.2</mu1>
+      <mu2>1.2</mu2>
+    </gazebo>
+    <gazebo reference="top_platform_${id}">
+      <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="lidar_link_${id}">
+      <material>Gazebo/Black</material>
+    </gazebo>
+    <xacro:if value="${with_cargo}">
+      <gazebo reference="cargo_${id}">
+        <material>${gazebo_mat}</material>
+      </gazebo>
+    </xacro:if>
+
+  </xacro:macro>
+</robot>

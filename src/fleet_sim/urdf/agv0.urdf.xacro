@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot name="agv0" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- 1. 使用相对路径引入 -->
+    <xacro:include filename="agv_core.urdf.xacro"/>
+
+    <!-- 2. 定义默认参数 -->
+    <xacro:arg name="robot_name" default="agv0"/>
+    <xacro:arg name="color" default="0 0.35 0.8 1.0"/>
+    <xacro:arg name="id" default="0"/>
+    <xacro:arg name="with_cargo" default="true"/>
+    <xacro:arg name="gazebo_mat" default="Gazebo/Blue"/>
+
+    <!-- 3. 调用宏，并显式把参数传进去 -->
+    <xacro:agv_core 
+        robot_name="$(arg robot_name)" 
+        color="$(arg color)" 
+        id="$(arg id)"
+        with_cargo="$(arg with_cargo)"
+        gazebo_mat="$(arg gazebo_mat)"/>
+
+</robot>
